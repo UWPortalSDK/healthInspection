@@ -22,7 +22,7 @@ angular.module('PortalApp')
     $scope.filter = { value: '' };
   	$scope.itemsPerPage = 20;
     $scope.currentPage = 1;
-    $scope.maxSize = 5;
+    $scope.maxSize = 3;
     $scope.matchingFacilities = 0;
   	$scope.pageChanged = function(newPage) {
         $scope.currentPage = newPage;
@@ -43,7 +43,7 @@ angular.module('PortalApp')
     }// End of getInspectionFacilities
     
     $scope.filterFacilities = function() {
-        if ($scope.filter.value == '' || $scope.filter.value == $scope.lastFilterValue) {
+        if ($scope.filter.value == $scope.lastFilterValue) {
         	var start = $scope.itemsPerPage * ($scope.currentPage - 1);
         	$scope.filteredFacilities = $scope.matchingFacilities.slice(start, start + $scope.itemsPerPage);
         } else {
