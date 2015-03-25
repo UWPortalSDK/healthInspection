@@ -27,8 +27,8 @@
  	<div widget-item><pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize"></pagination></div>
   
     <div widget-item icon-right="icon-angle-right" ng-click="showFacility(facility)" button ng-repeat="facility in filteredFacilities">
-        <div widget-text>{{facility.name}}</div>
-      	<div widget-sub-text>{{facility.street}}<br><small>{{facility.description}}</small></div>
+        <div widget-text>{{::facility.name}}</div>
+      	<div widget-sub-text>{{::facility.street}}<br><small>{{::facility.description}}</small></div>
     </div>
       
     <div widget-item><pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize"></pagination></div>
@@ -36,15 +36,15 @@
 </script>
 
 <script type="text/ng-template" id="facility.html">
-    <div widget-section-header>{{facility.name}}</div>
-    <div widget-item>{{facility.street}}</div>
+    <div widget-section-header>{{::facility.name}}</div>
+    <div widget-item>{{::facility.street}}</div>
     <div widget-item ng-repeat="inspection in facility.inspections | orderBy:'inspection_date':true">
-      <div widget-text>{{inspection.inspection_date | date:'longDate'}}</div>
-      <div widget-text><small>{{inspection.inspection_type}}</small></div>
+      <div widget-text>{{::inspection.inspection_date | date:'longDate'}}</div>
+      <div widget-text><small>{{::inspection.inspection_type}}</small></div>
         <div widget-sub-text>
           <ul class="no-bullet">
             <li ng-repeat="infraction in inspection.infractions">
-              {{infraction.category_code ? infraction.category_code : infraction.description}}<br><b>{{infraction.type}}&mdash;{{infraction.letter_code}}</b></li>
+              {{::infraction.category_code ? infraction.category_code : infraction.description}}<br><b>{{::infraction.type}}&mdash;{{::infraction.letter_code}}</b></li>
             <li ng-show="inspection.infractions.length == 0">No infractions were identified during this inspection.</li>
           </ul>
         </div>
