@@ -1,3 +1,9 @@
-#cssTest{
-	color:red;
+.no-bullet {
+  list-style: none; 
+  padding: 0;
+  padding-left: 15px;
+}
+
+.no-bullet li {
+  padding: 5px 5px; 
 }
