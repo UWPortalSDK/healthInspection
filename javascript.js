@@ -43,7 +43,6 @@ angular.module('PortalApp')
     }// End of getInspectionFacilities
     
     $scope.filterFacilities = function() {
-        console.log($scope.filter);
         if ($scope.filter.value == '' || $scope.filter.value == $scope.lastFilterValue) {
         	var start = $scope.itemsPerPage * ($scope.currentPage - 1);
         	$scope.filteredFacilities = $scope.matchingFacilities.slice(start, start + $scope.itemsPerPage);
