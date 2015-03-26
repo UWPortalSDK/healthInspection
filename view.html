@@ -1,52 +1,100 @@
+<!--
+	The MIT License (MIT)
+
+    Copyright (c) 2015 Zachary Seguin
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+-->
+
+<!-- Loading Template -->
 <script type="text/ng-template" id="loading.html">
     <div widget-item>
-        <div widget-sub-text>
-            Loading..
-        </div>
+        <div widget-sub-text><p>Loading..</p></div>
     </div>
-</script>
+  
+  	<div class="disclaimer" widget-item>
+    	<p>Contains information provided by the <a href="http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataHome.asp" target="_blank">Region of Waterloo</a> under license on an 'as is' basis.</p>
+	</div>
+</script><!-- End of loading template -->
 
+<!-- Main Template
+    Listing (and searching) of facilities.
+-->
 <script type="text/ng-template" id="main.html">
-
     <div widget-section-header>Facilities</div>
-  
     <div widget-item>
-      <form class="form-inline" ng-submit="filterFacilities()">
-        <div class="input-group" style="width: 100%;">
-          <input type="text" class="form-control" ng-model="filter.value" placeholder="Search for a facility..." ng-change="filterFacilities()" />
-          <span class="input-group-btn" style="overflow:hidden;">
-            <button class="btn btn-primary glyphicon glyphicon glyphicon-search btn" type="submit" style="margin-top: -1px;">
-            </button>
-            <button class="btn btn-primary glyphicon glyphicon glyphicon-remove btn" type="reset" style="margin-top: -1px;" ng-click="resetFilterFacilities()">
-            </button>
-          </span>
-        </div>
-      </form>
-  </div>
+        <form class="form-inline" ng-submit="filterFacilities()">
+            <div class="input-group" style="width: 100%;">
+                <input type="text" class="form-control" ng-model="filter.value" placeholder="Search for a facility..." ng-change="filterFacilities()" />
+                <span class="input-group-btn" style="overflow:hidden;">
+                    <button class="btn btn-primary glyphicon glyphicon glyphicon-search btn" type="submit" style="margin-top: -1px;">
+                    </button>
+                    <button class="btn btn-primary glyphicon glyphicon glyphicon-remove btn" type="reset" style="margin-top: -1px;" ng-click="resetFilterFacilities()">
+                </button>
+                </span>
+            </div>
+        </form>
+    </div>
   
- 	<div widget-item><pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize"></pagination></div>
+ 	<div widget-item>
+        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize">
+    </div>
   
     <div widget-item icon-right="icon-angle-right" ng-click="showFacility(facility)" button ng-repeat="facility in filteredFacilities">
         <div widget-text>{{::facility.name}}</div>
-      	<div widget-sub-text>{{::facility.street}}<br><small>{{::facility.description}}</small></div>
+      	<div widget-sub-text>
+            {{::facility.street}}
+            <br>
+            <small>{{::facility.description}}</small>
+        </div>
     </div>
       
-    <div widget-item><pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize"></pagination></div>
+    <div widget-item>
+        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize">
+    </div>
 
-</script>
+    <div class="disclaimer" widget-item>
+    	<p>Contains information provided by the <a href="http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataHome.asp" target="_blank">Region of Waterloo</a> under license on an 'as is' basis.</p>
+	</div>
+</script><!-- End of main.html template -->
 
+<!-- Facility Template
+    
+    Displays inspection results.
+-->
 <script type="text/ng-template" id="facility.html">
     <div widget-section-header>{{::facility.name}}</div>
     <div widget-item>{{::facility.street}}</div>
     <div widget-item ng-repeat="inspection in facility.inspections | orderBy:'inspection_date':true">
-      <div widget-text>{{::inspection.inspection_date | date:'longDate'}}</div>
-      <div widget-text><small>{{::inspection.inspection_type}}</small></div>
+        <div widget-text>{{::inspection.inspection_date | date:'longDate'}}</div>
+        <div widget-text><small>{{::inspection.inspection_type}}</small></div>
         <div widget-sub-text>
-          <ul class="no-bullet">
-            <li ng-repeat="infraction in inspection.infractions">
-              {{::infraction.category_code ? infraction.category_code : infraction.description}}<br><b>{{::infraction.type}}&mdash;{{::infraction.letter_code}}</b></li>
-            <li ng-show="inspection.infractions.length == 0">No infractions were identified during this inspection.</li>
-          </ul>
+            <ul class="no-bullet">
+                <li ng-repeat="infraction in inspection.infractions" class="{{::infraction.type}}">
+                    {{::infraction.category_code ? infraction.category_code : infraction.description}}<br><b>{{::infraction.type}}&mdash;{{::infraction.letter_code}}</b>
+                </li>
+                <li ng-show="inspection.infractions.length == 0">No infractions were identified during this inspection.</li>
+            </ul>
         </div>
     </div>
-</script>
+      
+    <div class="disclaimer" widget-item>
+    	<p>Contains information provided by the <a href="http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataHome.asp" target="_blank">Region of Waterloo</a> under license on an 'as is' basis.</p>
+	</div>
+</script><!-- End of facility.html -->
