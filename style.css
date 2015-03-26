@@ -48,16 +48,24 @@
 }
 
 .CRITICAL:before, .NON-CRITICAL:before {
-     content: ' ';
+    content: ' ';
 
-     position: absolute;
-     left: 8px;
-     top: 15px;
+    position: absolute;
+    left: -10px;
+    top: 45%;
 
-     display: box;
-     width: 10px;
-     height: 10px;
-     background: #eee;
+    display: box;
+    width: 10px;
+    height: 10px;
+    background: #eee;
 
-     border-radius: 50px; 
+    border-radius: 50px; 
+}
+
+.CRITICAL:before {
+    background: #ff0000; 
+}
+
+.NON-CRITICAL:before {
+    background: #ca9429; 
 }
