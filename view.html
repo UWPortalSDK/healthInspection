@@ -53,7 +53,7 @@
     </div>
   
  	<div widget-item>
-        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize">
+        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage.value" ng-change="pageChanged(currentPage.value)" rotate="false" max-size="maxSize">
     </div>
   
     <div widget-item icon-right="icon-angle-right" ng-click="showFacility(facility)" button ng-repeat="facility in filteredFacilities">
@@ -66,7 +66,7 @@
     </div>
       
     <div widget-item>
-        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)" rotate="false" max-size="maxSize">
+        <pagination total-items="matchingFacilities.length" items-per-page="itemsPerPage" ng-model="currentPage.value" ng-change="pageChanged(currentPage.value)" rotate="false" max-size="maxSize">
     </div>
 
     <div class="disclaimer" widget-item>
