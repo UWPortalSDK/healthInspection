@@ -36,7 +36,7 @@ angular
         $scope.filter = { value: '' };
         
         // Facilities Pagination
-        $scope.currentPage = 1;
+        $scope.currentPage = { value: 1 };
         $scope.itemsPerPage = 5;
         $scope.maxSize = 3; // maximum number of page links to display
 
@@ -57,9 +57,10 @@ angular
       	// Filters the facilities based on page and filter.
         $scope.filterFacilities = function() {
             if ($scope.filter.value == $scope.lastFilterValue) {
-            	var start = $scope.itemsPerPage * ($scope.currentPage - 1);
+            	var start = $scope.itemsPerPage * ($scope.currentPage.value - 1);
             	$scope.filteredFacilities = $scope.matchingFacilities.slice(start, start + $scope.itemsPerPage);
             } else {
+                $scope.currentPage.value = 1;
                 $scope.lastFilterValue = $scope.filter.value;
                 $scope.matchingFacilities = $filter('filter')($scope.facilities, $scope.filter.value);
                 $scope.filterFacilities();
@@ -69,7 +70,6 @@ angular
         /** Events **/
         // Callback called when the page is changed.
         $scope.pageChanged = function(newPage) {
-            $scope.currentPage = newPage;
             $scope.filterFacilities();
         }; // End of pageChanged event
         
