@@ -24,7 +24,7 @@
 
 angular
     .module('PortalApp')
-    .controller('widgetCtrl', ['$scope', '$http', '$q', '$filter', function ($scope, $http, $q, $filter) {
+    .controller('healthInspectionCtrl', ['$scope', '$http', '$q', '$filter', function ($scope, $http, $q, $filter) {
 
         /** Widget Configuration **/
         $scope.portalHelpers.config = {
